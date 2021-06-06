@@ -7,7 +7,7 @@ import Notification from './components/Notification'
 
 import phonebookService from './services/phonebook'
 
-import {Box, Grid } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -148,32 +148,21 @@ const App = () => {
     }
 
     return (
-        <Grid item xs={12} >
-            <Grid container justify="center" spacing={2}>
-                <Grid style={{display:'flex', alignItems:'start', justifyContent:'center', marginTop:30}} item >
-                    <img height="70%" src="https://media.giphy.com/media/l4FAUfcxoAWOzSkko/giphy.gif" alt="phonebook"/>
-                </Grid>
-                <Grid item  >
-                    <h1>Phonebook 📱</h1>
-                    <Notification notification={notificationMessage}/>
-                    <Filter filterText={filterText} handleFilterChange={handleFilterChange}/>
-                    <h1>Add 😎</h1>
-                    <PersonForm
-                        eventHandlers = {{handleSubmit, handleNameChange, handleNumberChange}}
-                        value = {{newName, newNumber}}
-                    />
-                </Grid>
-            </Grid>
-            <Grid container justify="center" alignContent="flex-start" spacing={2}>
-                <h1 style={{display:'flex', alignItems:'start', justifyContent:'center', }}  >Numbers 🙎</h1>
-                <Grid container justify="center">
-                    {
-                        filterText.trim() === '' ? <Persons persons={persons} handleDelete={(id, text)=> deletePerson(id, text)} />
-                            : <Persons persons={filteredPersons} handleDelete={(id, text) => deletePerson(id, text)}/>
-                    } 
-                </Grid>
-            </Grid>
-        </Grid>
+        <Container>
+            <h1>Phonebook 📱</h1>
+            <Notification notification={notificationMessage}/>
+            <Filter filterText={filterText} handleFilterChange={handleFilterChange}/>
+            <h1>Add 📝</h1>
+            <PersonForm
+                eventHandlers = {{handleSubmit, handleNameChange, handleNumberChange}}
+                value = {{newName, newNumber}}
+            />
+            <h1>Numbers 📔</h1>
+            {
+                filterText.trim() === '' ? <Persons persons={persons} handleDelete={(id, text)=> deletePerson(id, text)} />
+                    : <Persons persons={filteredPersons} handleDelete={(id, text) => deletePerson(id, text)}/>
+            } 
+        </Container>
     )
 }
 

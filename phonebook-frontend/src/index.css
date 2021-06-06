@@ -3,9 +3,13 @@
     background: lightgrey;
     font-size: 20px;
     border-style: solid;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content
+
 }
 
 .error {
@@ -13,13 +17,14 @@
     background: lightgrey;
     font-size: 20px;
     border-style: solid;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content
   }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 20;
-    background-color: #ececec
 }
