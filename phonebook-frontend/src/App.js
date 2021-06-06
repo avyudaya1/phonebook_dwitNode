@@ -7,6 +7,8 @@ import Notification from './components/Notification'
 
 import phonebookService from './services/phonebook'
 
+import {Box, Grid } from '@material-ui/core'
+
 const App = () => {
     const [persons, setPersons] = useState([])
     const [filteredPersons, setFilteredPersons] = useState([])
@@ -17,7 +19,9 @@ const App = () => {
 
     const [notificationMessage, setNotificationMessage] = useState({
         message: null,
-        status: null
+        status: null,
+        val: null,
+        handleNotification: null
     })
 
     const handleNameChange = (event) => setNewName(event.target.value)
@@ -42,7 +46,16 @@ const App = () => {
             setNotificationMessage({message: `${message} modified`, status: 'success'})
         }
         else if(status === 'validation error'){
-            setNotificationMessage({message: message, status: 'error'})
+            let pos = message.charAt(message.length -3)
+            if(pos === '8') {
+                setNotificationMessage({message: 'Number too short. Required at least 8 character long.', status:'error'})
+            }
+            else if (pos === '3') {
+                setNotificationMessage({message:'Name too short. Required at least 3 character long.', status:'error'})
+            }
+            else{
+                setNotificationMessage({message: message, status: 'error',})
+            }
         }
         else {
             setNotificationMessage({message: `Information of ${message} has already been removed from server.`, status:'error'})
@@ -135,21 +148,32 @@ const App = () => {
     }
 
     return (
-        <div>
-            <h1>Phonebook 📱</h1>
-            <Notification notification={notificationMessage}/>
-            <Filter filterText={filterText} handleFilterChange={handleFilterChange}/>
-            <h1>Add 😎</h1>
-            <PersonForm
-                eventHandlers = {{handleSubmit, handleNameChange, handleNumberChange}}
-                value = {{newName, newNumber}}
-            />
-            <h1>Numbers 🙎</h1>
-            {
-                filterText.trim() === '' ? <Persons persons={persons} handleDelete={(id, text)=> deletePerson(id, text)} />
-                    : <Persons persons={filteredPersons} handleDelete={(id, text) => deletePerson(id, text)}/>
-            }
-        </div>
+        <Grid item xs={12} >
+            <Grid container justify="center" spacing={2}>
+                <Grid style={{display:'flex', alignItems:'start', justifyContent:'center', marginTop:30}} item >
+                    <img height="70%" src="https://media.giphy.com/media/l4FAUfcxoAWOzSkko/giphy.gif" alt="phonebook"/>
+                </Grid>
+                <Grid item  >
+                    <h1>Phonebook 📱</h1>
+                    <Notification notification={notificationMessage}/>
+                    <Filter filterText={filterText} handleFilterChange={handleFilterChange}/>
+                    <h1>Add 😎</h1>
+                    <PersonForm
+                        eventHandlers = {{handleSubmit, handleNameChange, handleNumberChange}}
+                        value = {{newName, newNumber}}
+                    />
+                </Grid>
+            </Grid>
+            <Grid container justify="center" alignContent="flex-start" spacing={2}>
+                <h1 style={{display:'flex', alignItems:'start', justifyContent:'center', }}  >Numbers 🙎</h1>
+                <Grid container justify="center">
+                    {
+                        filterText.trim() === '' ? <Persons persons={persons} handleDelete={(id, text)=> deletePerson(id, text)} />
+                            : <Persons persons={filteredPersons} handleDelete={(id, text) => deletePerson(id, text)}/>
+                    } 
+                </Grid>
+            </Grid>
+        </Grid>
     )
 }
 

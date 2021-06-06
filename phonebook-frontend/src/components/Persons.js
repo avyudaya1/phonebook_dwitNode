@@ -7,7 +7,7 @@ const Persons = ({persons, handleDelete}) => {
                        <p key={person.id}>
                            {person.name} {person.number}
                            <button style={{marginLeft: 10}} onClick={()=>handleDelete(person.id, person.name)}>
-                                delete
+                                Delete
                            </button>
                        </p>
                    )

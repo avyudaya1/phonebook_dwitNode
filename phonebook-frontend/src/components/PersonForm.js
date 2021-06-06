@@ -1,3 +1,4 @@
+import {Button} from '@material-ui/core'
 const PersonForm = ({eventHandlers: {handleSubmit, handleNameChange, handleNumberChange}, 
                      value: {newName, newNumber}}) => {
     return (
@@ -9,7 +10,7 @@ const PersonForm = ({eventHandlers: {handleSubmit, handleNameChange, handleNumbe
                 Number: <input value={newNumber} onChange={handleNumberChange}/>
             </div>
             <div style={{marginBottom: 10}}>
-                <button type="submit">add</button>
+                <Button variant="contained" color="primary" type="submit">add</Button>
             </div>
         </form>
     )
